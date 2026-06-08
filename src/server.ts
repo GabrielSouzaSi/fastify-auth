@@ -25,8 +25,13 @@ app.get("/acai", async () => {
       "Content-Type": "application/json",
     },
   });
-  const data = await response.json();
-  return data;
+  if (!response.ok) {
+    return {
+      message: "Algo deu errado",
+    };
+  } else {
+    return "Ok";
+  }
 });
 
 app.register(fastifyJwt, {
