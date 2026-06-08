@@ -6,6 +6,7 @@ import { createUser } from "./routes/createUser";
 import { login } from "./routes/login";
 import { profile } from "./routes/profile";
 import { loginAcai } from "./routes/loginAcai";
+import { myOffers } from "./routes/myOffers";
 
 const app = fastify();
 
@@ -15,6 +16,7 @@ app.register(createUser);
 app.register(login);
 app.register(loginAcai);
 app.register(profile);
+app.register(myOffers);
 app.get("/", () => {
   return "Ok";
 });
