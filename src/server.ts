@@ -19,8 +19,8 @@ app.get("/", () => {
   return "Ok";
 });
 app.get("/acai", async () => {
-  const response = await fetch("http://189.126.105.9:5990/api/login", {
-    method: "POST",
+  const response = await fetch("http://189.126.105.9", {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
