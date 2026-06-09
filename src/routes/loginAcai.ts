@@ -31,8 +31,6 @@ export function loginAcai(app: FastifyInstance) {
 
     const data = await response.json();
 
-    return {
-      data,
-    };
+    return data;
   });
 }

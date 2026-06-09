@@ -20,8 +20,6 @@ export function myOffers(app: FastifyInstance) {
 
     const data = await response.json();
 
-    return {
-      data,
-    };
+    return data;
   });
 }
