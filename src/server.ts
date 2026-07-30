@@ -12,6 +12,7 @@ import { loginAcai } from "./routes/loginAcai";
 import { myOffers } from "./routes/myOffers";
 import { offers } from "./routes/offers";
 import { register } from "./routes/register";
+import { localities } from "./routes/localities";
 
 const app = fastify({
   logger: true,
@@ -34,6 +35,7 @@ app.register(profile);
 app.register(myOffers);
 app.register(offers);
 app.register(register);
+app.register(localities);
 
 const clients = new Set<any>();
 
