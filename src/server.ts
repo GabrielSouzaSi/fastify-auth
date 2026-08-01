@@ -14,6 +14,7 @@ import { offers } from "./routes/offers";
 import { register } from "./routes/register";
 import { localities } from "./routes/localities";
 import { municipalities } from "./routes/municipalities";
+import { sellOffer } from "./routes/sellOffer";
 
 const app = fastify({
   logger: true,
@@ -38,6 +39,7 @@ app.register(offers);
 app.register(register);
 app.register(localities);
 app.register(municipalities);
+app.register(sellOffer);
 
 const clients = new Set<any>();
 
