@@ -9,6 +9,7 @@ const registerSchema = z
     gender: z.string().trim().min(1, "O gênero é obrigatório"),
     profile_type: z.string(),
     municipality_id: z.number().int().positive(),
+    locality_id: z.number().int().positive(),
     community: z.string().trim().min(1, "A comunidade é obrigatória"),
     latitude: z.number().min(-90).max(90),
     longitude: z.number().min(-180).max(180),
