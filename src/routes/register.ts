@@ -1,16 +1,23 @@
 import { FastifyInstance } from "fastify";
 import { z } from "zod";
 
+const optionalTrimmedString = (schema: z.ZodString) =>
+  z.preprocess(
+    (value) =>
+      typeof value === "string" && value.trim() === "" ? undefined : value,
+    schema.trim().optional(),
+  );
+
 const registerSchema = z
   .object({
     name: z.string().trim().min(1, "O nome é obrigatório"),
-    email: z.string().trim().email("E-mail inválido"),
-    phone: z.string().trim().min(1, "O telefone é obrigatório"),
+    email: optionalTrimmedString(z.string().email("E-mail inválido")),
+    phone: optionalTrimmedString(z.string()),
     gender: z.string().trim().min(1, "O gênero é obrigatório"),
     profile_type: z.string(),
     municipality_id: z.number().int().positive(),
-    locality_id: z.number().int().positive(),
-    community: z.string().trim().min(1, "A comunidade é obrigatória"),
+    locality_id: z.number().int().positive().optional(),
+    community: optionalTrimmedString(z.string()),
     latitude: z.number().min(-90).max(90),
     longitude: z.number().min(-180).max(180),
     id_device: z.string().trim().min(1, "O identificador do dispositivo é obrigatório"),
@@ -20,6 +27,10 @@ const registerSchema = z
   .refine((data) => data.password === data.password_confirmation, {
     message: "As senhas não coincidem",
     path: ["password_confirmation"],
+  })
+  .refine((data) => Boolean(data.email || data.phone), {
+    message: "Informe um e-mail ou telefone",
+    path: ["email"],
   });
 
 export function register(app: FastifyInstance) {
